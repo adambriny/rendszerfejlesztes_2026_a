@@ -58,11 +58,45 @@ A rendszer két részből áll: egy nyilvános weboldalból, amelyet bárki hasz
 
 ### 2.2 Funkcionális követelmények
 
-> Kitöltés alatt (felelős: Martin, issue #2)
+A funkcionális követelmények azt írják le, **mit tud** a rendszer.
+
+| ID | Megnevezés | Leírás |
+|---|---|---|
+| F01 | Kalkulátor kérdések | A látogató megadja a havi megtakarítás összegét (Ft), kiválaszt egy futamidő-sávot ("5 év vagy az alatt", "5-10 év között", "10 év fölött"), és megadja a jelenlegi számlavezető bankját. |
+| F02 | Ajánlatkeresés | A szerver az adatbázisból kiolvassa minden intézmény azon tarifasorát, amely illeszkedik a megadott összegre és a választott futamidő-sávra. |
+| F03 | Rangsorolás | Az illeszkedő ajánlatokat a rendszer EBKM szerint csökkenő sorrendbe rendezi. Ha egy intézménynek több tarifasora is illeszkedik, a legmagasabb EBKM-ű számít. |
+| F04 | Eredménykártyák | 1-3 ajánlati kártya jelenik meg, intézménynév nélkül. Egy kártya mutatja: helyezés, havi megtakarítás, lejáratkor felvehető összeg, kamat, befizetett összeg. |
+| F05 | Ajánlat kiválasztása | Az "Ezt választom" gombra kattintva a látogató a kapcsolati űrlapra jut, a választott ajánlat adataival. |
+| F06 | Kapcsolati űrlap | Látható mezők: név, e-mail, telefonszám. A választott ajánlat adatai automatikusan kapcsolódnak az érdeklődőhöz. |
+| F07 | Adatvédelmi hozzájárulás | Az űrlap csak az Adatkezelési nyilatkozat elfogadása után küldhető el. |
+| F08 | Érdeklődés mentése | A beküldött érdeklődés az adatbázisba kerül "új" állapottal és a beérkezés dátumával. |
+| F09 | E-mail értesítés | Minden új érdeklődésről a megrendelő e-mailt kap: az érdeklődő elérhetősége, a választott ajánlat pontos adatai és az érintett intézmény. |
+| F10 | Admin bejelentkezés | Az admin felület csak felhasználónévvel és jelszóval érhető el. |
+| F11 | Tarifatábla-kezelés | Az admin intézményeket és tarifasorokat hozhat létre, módosíthat és törölhet. |
+| F12 | Leadkezelés | Az admin listázhatja az érdeklődéseket, állapotukat "új"-ról "lezárt"-ra válthatja, és kérésre törölheti őket. |
+| F13 | Tájékoztató oldalak | A weboldal tartalmaz kezdőlapot, Ismertető, Garanciák és Adatkezelési nyilatkozat aloldalt. |
 
 ### 2.3 Nem funkcionális követelmények
 
-> Kitöltés alatt (felelős: Martin, issue #2)
+A nem funkcionális követelmények azt írják le, **mennyire jól és milyen feltételek mellett** működik a rendszer.
+
+| ID | Terület | Követelmény |
+|---|---|---|
+| NF01 | Biztonság | Minden felhasználói bemenet escape-elve kerül megjelenítésre és e-mailbe (XSS elleni védelem). |
+| NF02 | Biztonság | Az adatbázis-műveletek kizárólag paraméterezett lekérdezésekkel (prepared statements) történnek (SQL injection elleni védelem). |
+| NF03 | Biztonság | Minden űrlapmezőt a szerver oldalon (PHP) is ellenőrizni kell, nem elég a böngészőben futó ellenőrzés. |
+| NF04 | Biztonság | Az admin jelszó hash-elve tárolódik, az admin felületet munkamenet-kezelés (session) védi. |
+| NF05 | Biztonság | A kapcsolati űrlapot honeypot mező vagy kérésszám-korlátozás védi a spam ellen. |
+| NF06 | Adatvédelem | A nyilvános felületre és a böngészőnek küldött válaszba intézménynév nem kerül ki, azt csak a szerver és az admin felület ismeri. |
+| NF07 | Adatvédelem | A megrendelő neve és személye a weboldalon sehol nem jelenik meg. |
+| NF08 | Adatvédelem | Az érdeklődők adatai kérésre törölhetők (GDPR). |
+| NF09 | Használhatóság | Az oldal reszponzív: mobilon, tableten és asztali gépen is jól használható. |
+| NF10 | Használhatóság | Az oldal magyar nyelvű, letisztult, egységes megjelenésű. |
+| NF11 | Keresőoptimalizálás | Minden oldal egyedi címmel és leírással rendelkezik, szemantikus HTML szerkezetet használ. |
+| NF12 | Technológia | A rendszer kizárólag HTML, CSS, JavaScript, PHP és MySQL technológiákra épül. |
+| NF13 | Megbízhatóság | Az e-mailek SMTP-n keresztül, PHPMailer könyvtárral kerülnek kiküldésre. |
+| NF14 | Jogi | A rendszer egyetemi demonstrációs célú, éles indítás előtt jogi és megfelelőségi ellenőrzés szükséges. |
+
 
 ## 4. Szervezeti felépítés és felelősségmegosztás
 
