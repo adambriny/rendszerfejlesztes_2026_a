@@ -100,8 +100,46 @@ A nem funkcionális követelmények azt írják le, **mennyire jól és milyen f
 
 ## 4. Szervezeti felépítés és felelősségmegosztás
 
-> Kitöltés alatt (felelős: Norbi, issue #3)
+A projektet egy háromfős csapat valósítja meg egy külső, valós megrendelő számára. A csapat munkáját a projektmenedzser hangolja össze, aki a kapcsolattartó is az oktató felé.
+
+### 4.1 Projektcsapat
+
+| Név | GitHub felhasználónév | Szerepkör | Fő felelősségi terület |
+|---|---|---|---|
+| Paragi Ádám | @adamparagi | Projektmenedzser, fejlesztő | Feladatok kiosztása, ütemezés, kapcsolattartás, Adatbázis |
+| Görög Martin | @gorogmartin | Fejlesztő | Backend |
+| Mag Norbert | @norbertmag2001-max | Fejlesztő | Frontend |
+
+### 4.2 Külső szereplők
+
+| Szereplő | Szerep |
+|---|---|
+| Megrendelő | A weboldal valós megrendelője, az érdeklődések fogadója. Nevét a nyilvános dokumentáció nem tartalmazza. |
+| Oktató | A mérföldkövek elfogadása, visszajelzés a bemutatókon. |
 
 ## 5. A munka feltételei
 
-> Kitöltés alatt (felelős: Norbi, issue #3)
+### 5.1 Munkakörnyezet
+
+| Terület | Eszköz |
+|---|---|
+| Verziókezelés és feladatkezelés | GitHub (repository, issue-k, pull requestek, projekttábla) |
+| Csapatkommunikáció | Discord |
+| Kódszerkesztő | Visual Studio Code |
+| Helyi fejlesztői környezet | XAMPP: Apache, PHP, MySQL |
+| Bemutatási környezet | Egyetemi szerver |
+
+**Munkamódszer:** minden feladat egy GitHub issue. Minden változtatás pull requesten keresztül kerül a fő ágba, amelyet egy másik csapattag átnéz, mielőtt elfogadják.
+
+### 5.2 Rizikómenedzsment
+
+| Kockázat | Hatás | Megelőzés, kezelés |
+|---|---|---|
+| Egy csapattag kiesik (betegség, egyéb elfoglaltság) | Csúszik a határidő | A feladatokat a projektmenedzser átosztja, a dokumentáció mindenki számára elérhető. |
+| Határidő csúszása | Mérföldkő nem teljesül | A feladatokat a határidő előtt legalább egy nappal "In Review" állapotba kell hozni. |
+| A tarifatáblák késve érkeznek a megrendelőtől | A kalkulátor nem tesztelhető valós adatokkal | Fejlesztés közben minta adatokkal dolgozunk. |
+| Az SMTP hozzáférés nem áll rendelkezésre | Az e-mail értesítés nem működik | Tesztelés közben teszt e-mail szolgáltatást használunk. |
+| Ütköző változtatások ugyanabban a fájlban | Elveszett vagy összekevert munka | Egy fájlon egyszerre lehetőleg egy ember dolgozik, a pull requesteket egymás után fogadjuk el. |
+| Jelszó vagy hozzáférési adat kerül a nyilvános repositoryba | Biztonsági incidens | Hozzáférési adat soha nem kerül a repositoryba, külön, a verziókezelésből kizárt konfigurációs fájlban tároljuk. |
+| Jogi, megfelelőségi kérdések éles indítás esetén | A rendszer nem indítható élesben | A projekt demonstrációs célú, éles indítás előtt a megrendelő jogi ellenőrzést végeztet. |
+
