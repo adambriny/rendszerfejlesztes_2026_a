@@ -17,13 +17,8 @@ sequenceDiagram
     S->>D: Illeszkedő tarifasorok lekérdezése
     D-->>S: Tarifasorok
     S->>S: Lejáratkori összeg és EBKM számítása, intézményenként a legjobb sor, rangsorolás
-    alt Van illeszkedő ajánlat
-        S-->>B: 1-3 ajánlat intézménynév nélkül
-        B-->>L: Ajánlati kártyák megjelenítése
-    else Nincs illeszkedő ajánlat
-        S-->>B: Üres eredmény
-        B-->>L: "Nincs a feltételeknek megfelelő ajánlat" üzenet
-    end
+    S-->>B: Intézményenként 1 ajánlat, intézménynév nélkül
+    B-->>L: Ajánlati kártyák megjelenítése
 
     Note over L,D: Ajánlat kiválasztása
     L->>B: "Ezt választom" gomb
@@ -45,4 +40,4 @@ sequenceDiagram
     end
 ```
 
-**Jelmagyarázat:** a függőleges szaggatott vonalak a szereplők életvonalai, fentről lefelé telik az idő. A folytonos nyíl egy kérés, a szaggatott nyíl a rá adott válasz. Az "alt" blokk két lehetséges kimenetet mutat, amelyek közül mindig csak az egyik történik meg.
+**Jelmagyarázat:** a függőleges szaggatott vonalak a szereplők életvonalai, fentről lefelé telik az idő. A folytonos nyíl egy kérés, a szaggatott nyíl a rá adott válasz. Az "alt" blokk az űrlap két lehetséges kimenetét mutatja, amelyek közül mindig csak az egyik történik meg.
