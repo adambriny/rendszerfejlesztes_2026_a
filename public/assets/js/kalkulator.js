@@ -1,6 +1,7 @@
 /*
  * Kalkulátor űrlap: ellenőrzi a válaszokat, lekéri az ajánlatokat a szervertől,
- * és megjeleníti őket. Az ellenőrzést a szerver is elvégzi, ez csak gyorsabb visszajelzés.
+ * és ajánlati kártyákként megjeleníti őket. Az ellenőrzést a szerver is elvégzi,
+ * ez csak gyorsabb visszajelzés a látogatónak.
  */
 (function () {
   'use strict';
@@ -9,6 +10,8 @@
   const eredmeny = document.getElementById('eredmeny');
   if (!urlap || !eredmeny) { return; }
 
+  const csrf = urlap.dataset.csrf;
+  const bankMezo = document.getElementById('bank');
   const forint = new Intl.NumberFormat('hu-HU', { maximumFractionDigits: 0 });
   const ft = function (szam) { return forint.format(szam) + ' Ft'; };
 
@@ -24,27 +27,73 @@
     return e;
   }
 
+  function rejtettMezo(nev, ertek) {
+    const input = elem('input');
+    input.type = 'hidden';
+    input.name = nev;
+    input.value = ertek;
+    return input;
+  }
+
   function uzenet(szoveg, hiba) {
     eredmeny.replaceChildren(elem('p', 'uzenet' + (hiba ? ' uzenet-hiba' : ''), szoveg));
   }
 
+  function adatSor(cimke, ertek) {
+    const sor = elem('div', 'ajanlat-adat');
+    sor.append(elem('dt', null, cimke), elem('dd', null, ertek));
+    return sor;
+  }
+
+  function kartya(a) {
+    const k = elem('article', 'ajanlat-kartya' + (a.helyezes === 1 ? ' ajanlat-elso' : ''));
+    const adatok = elem('dl', 'ajanlat-adatok');
+    adatok.append(
+      adatSor('Havi megtakarítás', ft(a.havi_megtakaritas)),
+      adatSor('Havi befizetések száma', a.befizetesek_szama + ' hó'),
+      adatSor('Befizetett összeg', ft(a.befizetett_osszeg)),
+      adatSor('Kamat és kamatbónusz', '+' + ft(a.lejaratkori_osszeg - a.befizetett_osszeg))
+    );
+
+    // A kiválasztás csak a helyezést küldi el, az ajánlat adatait a szerver a saját tárolt eredményéből veszi.
+    const valaszto = elem('form');
+    valaszto.method = 'post';
+    valaszto.action = 'valasztas.php';
+    valaszto.append(
+      rejtettMezo('csrf', csrf),
+      rejtettMezo('helyezes', a.helyezes),
+      rejtettMezo('bank', bankMezo.value)
+    );
+    const gomb = elem('button', 'gomb gomb-teljes' + (a.helyezes === 1 ? ' gomb-vilagos' : ''), 'Ezt választom');
+    gomb.type = 'submit';
+    gomb.setAttribute('aria-label', 'Ezt választom: ' + a.helyezes + '. helyezett');
+    valaszto.appendChild(gomb);
+
+    k.append(
+      elem('span', 'cimke', a.helyezes + '. helyezett'),
+      elem('p', 'ajanlat-felirat', 'Lejáratkor felvehető összeg'),
+      elem('p', 'ajanlat-osszeg', ft(a.lejaratkori_osszeg)),
+      adatok,
+      valaszto
+    );
+    return k;
+  }
+
   function megjelenites(adat) {
-    const lista = elem('ol', 'ajanlat-lista');
-    adat.ajanlatok.forEach(function (a) {
-      const sor = elem('li', 'ajanlat-sor');
-      sor.append(
-        elem('strong', null, a.helyezes + '. helyezett'),
-        elem('span', null, 'Lejáratkor felvehető: ' + ft(a.lejaratkori_osszeg)),
-        elem('span', null, a.befizetesek_szama + ' hónap, befizetett összeg: ' + ft(a.befizetett_osszeg))
-      );
-      lista.appendChild(sor);
-    });
+    const racs = elem('div', 'ajanlat-racs');
+    adat.ajanlatok.forEach(function (a) { racs.appendChild(kartya(a)); });
     eredmeny.replaceChildren(
-      elem('h2', null, 'Az Ön legjobb lehetőségei'),
+      elem('h2', null, 'Az Ön legjobb lehetőségei.'),
       elem('p', 'alcim', ft(adat.havi_megtakaritas) + '/hó, ' + adat.futamido_sav + '. EBKM szerint rangsorolva, banknevek nélkül.'),
-      lista
+      racs,
+      elem('p', 'megjegyzes', 'Tájékoztató jellegű számítás. A pontos feltételeket szerződéskötés előtt minden esetben egyeztetjük.')
     );
   }
+
+  // Ha a látogató a kártyák megjelenése után módosítja a bankot, a kártyák már az újat küldik el.
+  bankMezo.addEventListener('change', function () {
+    eredmeny.querySelectorAll('input[name="bank"]').forEach(function (input) { input.value = bankMezo.value; });
+  });
 
   urlap.addEventListener('submit', async function (esemeny) {
     esemeny.preventDefault();
