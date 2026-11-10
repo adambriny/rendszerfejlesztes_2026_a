@@ -1,0 +1,288 @@
+/* =====================================================================
+   kamatbonusz.hu közös stíluslap
+   Fekete-fehér, lekerekített kártyás megjelenés, mobilról indulva.
+   ===================================================================== */
+
+:root {
+  --fekete: #111111;
+  --feher: #ffffff;
+  --hatter: #f5f5f7;
+  --szurke-sotet: #555555;
+  --szurke: #86868b;
+  --vonal: #e5e5e7;
+  --mezo-vonal: #d2d2d7;
+  --link: #0066cc;
+  --hiba: #c62828;
+  --hiba-hatter: #fdecea;
+  --sugar-nagy: 22px;
+  --sugar: 12px;
+  --betu: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--betu);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--fekete);
+  background: var(--hatter);
+}
+
+a { color: var(--link); }
+
+h1, h2, h3 { line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 0.4em; }
+h1 { font-size: clamp(2rem, 6vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.125rem); }
+
+:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+
+.rejtett {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Fejléc ---------- */
+
+.fejlec {
+  background: var(--feher);
+  border-bottom: 1px solid var(--vonal);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.fejlec-belso {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--fekete);
+  text-decoration: none;
+}
+.logo span { font-weight: 400; color: var(--szurke-sotet); }
+
+/* Mobilon a menü a logó alatt egy vízszintesen görgethető sorban van. */
+.menu {
+  order: 3;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  font-size: 0.9375rem;
+}
+.menu a { color: var(--szurke-sotet); text-decoration: none; white-space: nowrap; padding: 4px 0; }
+.menu a[aria-current="page"] {
+  color: var(--fekete);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.fejlec-cta { margin-left: auto; }
+
+@media (min-width: 800px) {
+  .fejlec-belso { padding: 16px 32px; flex-wrap: nowrap; }
+  .menu { order: 0; width: auto; margin: 0 auto; gap: 32px; }
+  .fejlec-cta { margin-left: 0; }
+}
+
+/* ---------- Gombok ---------- */
+
+.gomb {
+  display: inline-block;
+  border: 0;
+  border-radius: 999px;
+  background: var(--fekete);
+  color: var(--feher);
+  font: inherit;
+  font-weight: 600;
+  padding: 14px 24px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.gomb:hover { background: #333333; }
+.gomb:disabled { opacity: 0.5; cursor: wait; }
+.gomb-kicsi { padding: 8px 16px; font-size: 0.875rem; }
+.gomb-teljes { width: 100%; }
+
+/* ---------- Szakaszok és kártyák ---------- */
+
+.szakasz { padding: 40px 16px 56px; }
+.tartalom { max-width: 1200px; margin: 0 auto; }
+
+@media (min-width: 800px) {
+  .szakasz { padding: 56px 32px 72px; }
+}
+
+.felcim { font-size: 0.875rem; color: var(--szurke-sotet); margin: 0 0 8px; }
+.alcim { color: var(--szurke-sotet); font-size: 1.0625rem; margin: 0 0 24px; }
+
+.kartya {
+  background: var(--feher);
+  border: 1px solid var(--vonal);
+  border-radius: var(--sugar-nagy);
+  padding: 24px;
+}
+
+/* ---------- Kalkulátor ---------- */
+
+.kalkulator { display: grid; gap: 24px; }
+
+@media (min-width: 900px) {
+  .kalkulator {
+    grid-template-columns: 1fr 1.6fr 1fr;
+    align-items: start;
+    padding: 32px;
+  }
+  .kalkulator .gomb { grid-column: 1 / -1; justify-self: end; width: auto; min-width: 220px; }
+}
+
+.kerdes { border: 0; margin: 0; padding: 0; min-width: 0; }
+.kerdes-cim { display: block; font-weight: 600; font-size: 0.9375rem; margin-bottom: 10px; padding: 0; }
+
+.legordulo {
+  width: 100%;
+  font: inherit;
+  padding: 13px 14px;
+  border: 1px solid var(--mezo-vonal);
+  border-radius: var(--sugar);
+  background: var(--feher);
+  color: var(--fekete);
+}
+
+/* Futamidő: három egymás melletti választógomb, mobilon egymás alatt. */
+.szegmens {
+  display: grid;
+  border: 1px solid var(--mezo-vonal);
+  border-radius: var(--sugar);
+  overflow: hidden;
+}
+.szegmens label { position: relative; }
+.szegmens label + label { border-top: 1px solid var(--mezo-vonal); }
+.szegmens input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.szegmens span { display: block; padding: 13px 10px; text-align: center; font-size: 0.9375rem; cursor: pointer; }
+.szegmens input:checked + span { background: var(--fekete); color: var(--feher); font-weight: 600; }
+.szegmens input:focus-visible + span { outline: 3px solid var(--link); outline-offset: -3px; }
+
+@media (min-width: 600px) {
+  .szegmens { grid-template-columns: repeat(3, 1fr); }
+  .szegmens label + label { border-top: 0; border-left: 1px solid var(--mezo-vonal); }
+}
+
+/* Számkerék: 5 sor látszik, a középső a kiválasztott. A sormagasság egyezik a kerek.js-ben lévővel. */
+.kerek {
+  --sor: 44px;
+  position: relative;
+  height: calc(var(--sor) * 5);
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  border: 1px solid var(--mezo-vonal);
+  border-radius: var(--sugar);
+  background: var(--feher);
+  -webkit-mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent);
+  mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent);
+  outline-offset: 2px;
+}
+.kerek::-webkit-scrollbar { display: none; }
+
+.kerek-lista {
+  list-style: none;
+  margin: 0;
+  /* Fent és lent két üres sornyi hely, hogy az első és az utolsó érték is középre gördülhessen. */
+  padding: calc(var(--sor) * 2) 0;
+  background:
+    linear-gradient(var(--hatter), var(--hatter)) no-repeat
+    0 calc(var(--sor) * 2) / 100% var(--sor);
+  background-attachment: local;
+}
+
+.kerek-elem {
+  height: var(--sor);
+  line-height: var(--sor);
+  text-align: center;
+  scroll-snap-align: center;
+  color: var(--szurke);
+  font-size: 1.0625rem;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s, font-size 0.15s;
+}
+.kerek-aktiv { color: var(--fekete); font-weight: 700; font-size: 1.25rem; }
+
+/* A kerék közepén lévő sáv jelzi a kiválasztott sort. */
+.kerek::before {
+  content: "";
+  position: sticky;
+  display: block;
+  top: calc(var(--sor) * 2);
+  height: var(--sor);
+  margin-bottom: calc(var(--sor) * -1);
+  border-top: 1px solid var(--mezo-vonal);
+  border-bottom: 1px solid var(--mezo-vonal);
+  background: rgba(0, 0, 0, 0.04);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---------- Üzenetek ---------- */
+
+.mezo-hiba { color: var(--hiba); font-size: 0.875rem; margin: 8px 0 0; }
+
+.uzenet {
+  background: var(--feher);
+  border: 1px solid var(--vonal);
+  border-radius: var(--sugar);
+  padding: 14px 18px;
+}
+.uzenet-hiba { background: var(--hiba-hatter); border-color: #f5c2c0; color: var(--hiba); }
+
+/* ---------- Eredmény ---------- */
+
+.eredmeny { margin-top: 40px; scroll-margin-top: 120px; }
+.eredmeny:empty { display: none; }
+
+.ajanlat-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.ajanlat-sor {
+  background: var(--feher);
+  border: 1px solid var(--vonal);
+  border-radius: var(--sugar);
+  padding: 16px 20px;
+  display: grid;
+  gap: 4px;
+}
+
+/* ---------- Lábléc ---------- */
+
+.lablec { background: var(--feher); border-top: 1px solid var(--vonal); font-size: 0.8125rem; color: var(--szurke-sotet); }
+.lablec-belso {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+.lablec nav { display: flex; gap: 20px; }
+.lablec a { color: var(--szurke-sotet); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+}
