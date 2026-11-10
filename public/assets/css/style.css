@@ -253,20 +253,85 @@ h2 { font-size: clamp(1.5rem, 4vw, 2.125rem); }
 }
 .uzenet-hiba { background: var(--hiba-hatter); border-color: #f5c2c0; color: var(--hiba); }
 
-/* ---------- Eredmény ---------- */
+/* ---------- Eredmény: ajánlati kártyák ---------- */
 
 .eredmeny { margin-top: 40px; scroll-margin-top: 120px; }
 .eredmeny:empty { display: none; }
 
-.ajanlat-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-.ajanlat-sor {
+.ajanlat-racs { display: grid; gap: 16px; }
+@media (min-width: 900px) {
+  .ajanlat-racs { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+
+.ajanlat-kartya {
   background: var(--feher);
   border: 1px solid var(--vonal);
-  border-radius: var(--sugar);
-  padding: 16px 20px;
-  display: grid;
-  gap: 4px;
+  border-radius: var(--sugar-nagy);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
 }
+.ajanlat-elso { background: var(--fekete); color: var(--feher); border-color: var(--fekete); }
+
+.cimke {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 5px 11px;
+  background: #f0f0f2;
+  color: var(--fekete);
+}
+.ajanlat-elso .cimke { background: var(--feher); }
+
+.ajanlat-felirat { font-size: 0.8125rem; color: var(--szurke); margin: 16px 0 2px; }
+.ajanlat-elso .ajanlat-felirat { color: #aaaaaa; }
+.ajanlat-osszeg { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 16px; }
+
+.ajanlat-adatok { margin: 0 0 20px; flex: 1; }
+.ajanlat-adat {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--vonal);
+  font-size: 0.9375rem;
+}
+.ajanlat-elso .ajanlat-adat { border-color: #333333; }
+.ajanlat-adat dt { margin: 0; }
+.ajanlat-adat dd { margin: 0; font-weight: 600; text-align: right; white-space: nowrap; }
+
+.gomb-vilagos { background: var(--feher); color: var(--fekete); }
+.gomb-vilagos:hover { background: #e8e8ea; }
+
+.megjegyzes { font-size: 0.8125rem; color: var(--szurke); text-align: center; margin: 16px 0 0; }
+
+/* ---------- Kapcsolat oldal ---------- */
+
+.kapcsolat { display: grid; gap: 32px; align-items: start; }
+@media (min-width: 900px) {
+  .kapcsolat { grid-template-columns: 1fr 480px; gap: 56px; }
+}
+
+.kiemelt-doboz {
+  background: var(--fekete);
+  color: var(--feher);
+  border-radius: var(--sugar-nagy);
+  padding: 24px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.kartya-cim { font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 16px; }
+
+.valasztott { background: var(--hatter); border-radius: 16px; padding: 16px 18px; margin-bottom: 20px; }
+.valasztott-fej { display: flex; justify-content: space-between; gap: 12px; font-size: 0.875rem; }
+.valasztott-fej a { font-weight: 600; text-decoration: none; }
+.valasztott dl { margin: 8px 0 0; }
+.valasztott dl div { display: flex; justify-content: space-between; gap: 12px; font-size: 0.875rem; color: var(--szurke-sotet); margin-top: 6px; }
+.valasztott dt, .valasztott dd { margin: 0; }
+.valasztott dd { white-space: nowrap; }
 
 /* ---------- Lábléc ---------- */
 
