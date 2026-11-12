@@ -1,0 +1,1 @@
+PHPMailer 6.9.3, forrás: https://github.com/PHPMailer/PHPMailer (LGPL 2.1, lásd LICENSE)

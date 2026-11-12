@@ -6,6 +6,7 @@ require __DIR__ . '/../src/layout.php';
 
 $valasztott = $_SESSION['valasztott'] ?? null;
 $urlap = null;
+$mentesiHiba = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Lejárt munkamenet, hiányzó token vagy választott ajánlat nélkül nincs mit beküldeni.
@@ -23,8 +24,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $urlap = new KapcsolatUrlap($_POST);
     if ($urlap->ervenyes()) {
-        // Ide kerül az érdeklődés mentése és az e-mail értesítés (#22).
+        // 1. Mentés: ha ez nem sikerül, a látogató hibaüzenetet kap, és újra próbálhatja.
+        try {
+            $db = Database::kapcsolat($config);
+            $mentes = new LeadMentes($db);
+            $leadId = $mentes->ment($valasztott, $urlap->adatok);
+        } catch (Throwable $e) {
+            error_log('Érdeklődés mentési hiba: ' . $e->getMessage());
+            $mentesiHiba = true;
+        }
 
+        // 2. Értesítés: az érdeklődés ekkor már el van mentve, így egy sikertelen
+        // e-mail küldés miatt nem vész el. A hiba a naplóba kerül.
+        if (!$mentesiHiba) {
+            try {
+                if (empty($config['mail']['cimzett'])) {
+                    throw new RuntimeException('Hiányzó e-mail beállítás a config.php fájlban.');
+                }
+                $intezmeny = $mentes->intezmenyNev((int) $valasztott['ajanlat']['intezmeny_id']);
+                (new Ertesito($config['mail']))->kuld($leadId, $valasztott, $urlap->adatok, $intezmeny);
+            } catch (Throwable $e) {
+                error_log('Értesítő e-mail hiba (érdeklődés #' . $leadId . '): ' . $e->getMessage());
+            }
+        }
+    }
+
+    if ($urlap->ervenyes() && !$mentesiHiba) {
         $_SESSION['kapcsolat_siker'] = true;
         unset($_SESSION['valasztott']);
         // Átirányítás után a böngésző frissítése nem küldi be újra az űrlapot.
@@ -83,6 +108,8 @@ oldal_fej(
 
         <?php if ($urlap !== null && !$urlap->ervenyes()): ?>
           <p class="uzenet uzenet-hiba" role="alert">Kérjük, javítsa a megjelölt mezőket.</p>
+        <?php elseif ($mentesiHiba): ?>
+          <p class="uzenet uzenet-hiba" role="alert">Átmeneti hiba miatt nem sikerült elküldeni az érdeklődését. Kérjük, próbálja újra néhány perc múlva.</p>
         <?php endif; ?>
 
         <form class="urlap" action="kapcsolat.php" method="post">
