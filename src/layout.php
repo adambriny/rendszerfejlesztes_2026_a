@@ -18,10 +18,10 @@ function ft(int $osszeg): string
     return number_format($osszeg, 0, ',', "\u{00A0}") . "\u{00A0}Ft";
 }
 
+// A kalkulátor nem menüpont, hanem a jobb felső kiemelt gomb vezet oda.
 const MENU = [
     'ismerteto.php' => 'Ismertető',
     'garanciak.php' => 'Garanciák',
-    'kalkulator.php' => 'Kalkulátor',
     'kapcsolat.php' => 'Kapcsolat',
 ];
 
@@ -50,7 +50,7 @@ function oldal_fej(string $cim, string $leiras, string $aktiv = ''): void
           <a href="<?= e($url) ?>"<?= $url === $aktiv ? ' aria-current="page"' : '' ?>><?= e($nev) ?></a>
         <?php endforeach; ?>
       </nav>
-      <a class="gomb gomb-kicsi fejlec-cta" href="kalkulator.php">Kalkuláció indítása</a>
+      <a class="gomb gomb-kicsi fejlec-cta" href="kalkulator.php"<?= $aktiv === 'kalkulator.php' ? ' aria-current="page"' : '' ?>>Kalkuláció indítása</a>
     </div>
   </header>
   <main>

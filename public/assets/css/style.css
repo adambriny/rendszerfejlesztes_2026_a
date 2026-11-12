@@ -23,7 +23,12 @@
 
 html { -webkit-text-size-adjust: 100%; }
 
+/* A lábléc rövid oldalon is az ablak aljára kerül: a tartalom kitölti a maradék helyet. */
 body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   font-family: var(--betu);
   font-size: 16px;
@@ -122,6 +127,8 @@ h2 { font-size: clamp(1.5rem, 4vw, 2.125rem); }
 .gomb-teljes { width: 100%; }
 
 /* ---------- Szakaszok és kártyák ---------- */
+
+main { flex: 1 0 auto; }
 
 .szakasz { padding: 40px 16px 56px; }
 .tartalom { max-width: 1200px; margin: 0 auto; }
@@ -351,3 +358,26 @@ h2 { font-size: clamp(1.5rem, 4vw, 2.125rem); }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* ---------- Űrlapmezők ---------- */
+
+.urlap { display: grid; gap: 16px; }
+.mezo label { display: block; font-weight: 600; font-size: 0.875rem; margin-bottom: 6px; }
+.mezo input {
+  width: 100%;
+  font: inherit;
+  padding: 13px 14px;
+  border: 1px solid var(--mezo-vonal);
+  border-radius: var(--sugar);
+  background: var(--feher);
+  color: var(--fekete);
+}
+.mezo input[aria-invalid="true"], .jelolo input[aria-invalid="true"] { border-color: var(--hiba); outline-color: var(--hiba); }
+
+.jelolo { display: flex; gap: 10px; align-items: flex-start; font-size: 0.875rem; }
+.jelolo input { width: 20px; height: 20px; margin: 1px 0 0; flex: none; accent-color: var(--fekete); }
+
+/* A honeypot mező a képernyőn kívül van, így ember nem látja és nem tölti ki. */
+.csapda { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.uzenet-siker { background: #e8f5e9; border-color: #b7dfb9; color: #1b5e20; }
