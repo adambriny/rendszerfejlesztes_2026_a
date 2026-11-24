@@ -21,9 +21,10 @@ oldal_fej(
 ?>
 <section class="szakasz">
   <div class="tartalom">
-    <p class="felcim">Kalkulátor</p>
-    <h1>Mennyit érhet a megtakarítása?</h1>
-    <p class="alcim">Három kérdés, személyes adat nélkül.</p>
+    <div class="szakasz-fej">
+      <h1>Mennyit érhet a megtakarítása?</h1>
+      <p class="alcim">Három kérdés, személyes adat nélkül.</p>
+    </div>
 
     <noscript>
       <p class="uzenet uzenet-hiba">A kalkulátor használatához engedélyezze a JavaScriptet a böngészőjében.</p>

@@ -12,9 +12,10 @@ oldal_fej(
 ?>
 <section class="szakasz">
   <div class="tartalom">
-    <p class="felcim">Garanciák</p>
-    <h1>Biztonság, amit előre látni lehet.</h1>
-    <p class="alcim keskeny">Két dolog, ami miatt nyugodtan alszik: a megtakarítása védett, a kamata pedig nem változik.</p>
+    <div class="szakasz-fej">
+      <h1>Biztonság, amit előre látni lehet.</h1>
+      <p class="alcim">Két dolog, ami miatt nyugodtan alszik: a megtakarítása védett, a kamata pedig nem változik.</p>
+    </div>
     <div class="kettes">
       <article class="kartya ajanlat-elso">
         <p class="felcim">OBA-védelem</p>
@@ -32,7 +33,9 @@ oldal_fej(
 
 <section class="szakasz szakasz-feher">
   <div class="tartalom">
-    <h2>És ami még számít.</h2>
+    <div class="szakasz-fej">
+      <h2>És ami még számít.</h2>
+    </div>
     <div class="harmas">
       <article class="kartya"><h3>Felügyelt intézmények</h3><p>A lakástakarék-pénztárak a Magyar Nemzeti Bank felügyelete alatt működnek.</p></article>
       <article class="kartya"><h3>Összehasonlítható ajánlatok</h3><p>Az ajánlatokat az EBKM alapján rangsoroljuk, amely a költségeket is tartalmazza.</p></article>

@@ -22,7 +22,6 @@ oldal_fej(
 <section class="szakasz">
   <div class="tartalom hos">
     <div>
-      <p class="felcim">Lakástakarék-kalkulátor</p>
       <h1>A megtakarítás nem lemondás. Hanem döntés.</h1>
       <p class="alcim">Tegyen félre havonta egy kiszámítható összeget, és nézze meg, mennyit ér ez fix kamattal és kamatbónusszal néhány év múlva.</p>
       <div class="gombsor">
@@ -43,8 +42,10 @@ oldal_fej(
 
 <section class="szakasz szakasz-feher">
   <div class="tartalom">
-    <h2>Miért épp lakástakarék?</h2>
-    <p class="alcim">Három ok, amiért a kiszámíthatóság többet ér, mint a bizonytalan hozam.</p>
+    <div class="szakasz-fej">
+      <h2>Miért épp lakástakarék?</h2>
+      <p class="alcim">Három ok, amiért a kiszámíthatóság többet ér, mint a bizonytalan hozam.</p>
+    </div>
     <div class="harmas">
       <article class="kartya">
         <h3>Fix kamat</h3>
@@ -65,9 +66,10 @@ oldal_fej(
 <?php if ($pelda !== null): ?>
 <section class="szakasz">
   <div class="tartalom">
-    <p class="felcim">Egy példa</p>
-    <h2>Havi 20 000 forint. Tíz év.</h2>
-    <p class="alcim">Ebből <?= e(ft((int) $pelda['osszes_befizetes'])) ?> az Ön befizetése. A többit a kamat és a kamatbónusz teszi hozzá.</p>
+    <div class="szakasz-fej">
+      <h2>Havi 20 000 forint. Tíz év.</h2>
+      <p class="alcim">Ebből <?= e(ft((int) $pelda['osszes_befizetes'])) ?> az Ön befizetése. A többit a kamat és a kamatbónusz teszi hozzá.</p>
+    </div>
     <div class="harmas szamok">
       <div><strong><?= e(ft((int) $pelda['havi_megtakaritas'])) ?></strong><span>havi megtakarítás</span></div>
       <div><strong><?= e($pelda['befizetesek_szama']) ?></strong><span>hónap futamidő</span></div>
@@ -80,7 +82,9 @@ oldal_fej(
 
 <section class="szakasz szakasz-feher">
   <div class="tartalom">
-    <h2>Három lépés. Semmi apró betű.</h2>
+    <div class="szakasz-fej">
+      <h2>Három lépés. Semmi apró betű.</h2>
+    </div>
     <ol class="lepesek harmas">
       <li class="kartya">
         <h3>Válaszoljon 3 kérdésre</h3>

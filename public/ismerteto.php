@@ -11,16 +11,17 @@ oldal_fej(
 );
 ?>
 <section class="szakasz">
-  <div class="tartalom">
-    <p class="felcim">Ismertető</p>
+  <div class="tartalom szakasz-fej">
     <h1>Lakástakarék, érthetően.</h1>
-    <p class="alcim keskeny">A lakástakarék-pénztár egy lakáscélú megtakarítási forma. Rendszeresen félretesz, a pénztár pedig fix kamatot és a feltételek teljesítésekor kamatbónuszt ír jóvá.</p>
+    <p class="alcim">A lakástakarék-pénztár egy lakáscélú megtakarítási forma. Rendszeresen félretesz, a pénztár pedig fix kamatot és a feltételek teljesítésekor kamatbónuszt ír jóvá.</p>
   </div>
 </section>
 
 <section class="szakasz szakasz-feher">
   <div class="tartalom">
-    <h2>Hogyan működik?</h2>
+    <div class="szakasz-fej">
+      <h2>Hogyan működik?</h2>
+    </div>
     <div class="kettes">
       <article class="kartya">
         <p class="felcim">1. szakasz</p>
@@ -44,8 +45,10 @@ oldal_fej(
 
 <section class="szakasz">
   <div class="tartalom">
-    <h2>Mire használható fel?</h2>
-    <p class="alcim">Minden, ami az otthonához kapcsolódik.</p>
+    <div class="szakasz-fej">
+      <h2>Mire használható fel?</h2>
+      <p class="alcim">Minden, ami az otthonához kapcsolódik.</p>
+    </div>
     <div class="harmas">
       <article class="kartya"><h3>Lakásvásárlás</h3><p>Új vagy használt ingatlan megvásárlása.</p></article>
       <article class="kartya"><h3>Építés</h3><p>Saját otthon felépítése az alapoktól.</p></article>
@@ -59,7 +62,9 @@ oldal_fej(
 
 <section class="szakasz szakasz-feher">
   <div class="tartalom keskeny">
-    <h2>Gyakori kérdések</h2>
+    <div class="szakasz-fej">
+      <h2>Gyakori kérdések</h2>
+    </div>
     <div class="gyik">
       <details>
         <summary>Mennyi ideig kell takarékoskodni?</summary>
