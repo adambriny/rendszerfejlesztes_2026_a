@@ -82,9 +82,13 @@
   function megjelenites(adat) {
     const racs = elem('div', 'ajanlat-racs');
     adat.ajanlatok.forEach(function (a) { racs.appendChild(kartya(a)); });
-    eredmeny.replaceChildren(
+    const fej = elem('div', 'szakasz-fej');
+    fej.append(
       elem('h2', null, 'Az Ön legjobb lehetőségei.'),
-      elem('p', 'alcim', ft(adat.havi_megtakaritas) + '/hó, ' + adat.futamido_sav + '. EBKM szerint rangsorolva, banknevek nélkül.'),
+      elem('p', 'alcim', ft(adat.havi_megtakaritas) + '/hó, ' + adat.futamido_sav + '. EBKM szerint rangsorolva, banknevek nélkül.')
+    );
+    eredmeny.replaceChildren(
+      fej,
       racs,
       elem('p', 'megjegyzes', 'Tájékoztató jellegű számítás. A pontos feltételeket szerződéskötés előtt minden esetben egyeztetjük.')
     );

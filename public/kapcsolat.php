@@ -73,7 +73,6 @@ oldal_fej(
 <section class="szakasz">
   <div class="tartalom kapcsolat">
     <div>
-      <p class="felcim">Kapcsolat</p>
       <h1>Beszéljünk a megtakarításáról.</h1>
       <p class="alcim">Hagyja meg elérhetőségét, és egy rövid hívásban végigvesszük a számokat.</p>
       <p class="kiemelt-doboz">Nincs kötelezettség, csak egy beszélgetés indul.</p>

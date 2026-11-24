@@ -50,8 +50,13 @@
       }
     }
 
+    // A legutóbb kért érték. Gyors egymás utáni görgetésnél ehhez lépünk, nem a még mozgó
+    // kerék pillanatnyi állásához, így egy kattanás sem vész el.
+    let cel = select.selectedIndex;
+
     function ugras(index, simitott) {
       index = Math.max(0, Math.min(opciok.length - 1, index));
+      cel = index;
       kerek.scrollTo({ top: index * SOR_MAGASSAG, behavior: simitott ? 'smooth' : 'auto' });
       kijeloles(index);
     }
@@ -65,11 +70,31 @@
       idozito = setTimeout(function () { ugras(select.selectedIndex, true); }, 150);
     }, { passive: true });
 
+    // Egérgörgő: egy kattanás pontosan egy értéket lép. A böngésző alapból több sort
+    // görgetne egyszerre, ezért a görgetést mi végezzük. Az érintőpad sok apró jelet küld,
+    // ezeket összegyűjtjük, és csak egy egész "kattanásnyi" mozgás után lépünk.
+    let gyujto = 0;
+    let utolsoLepes = 0;
+    kerek.addEventListener('wheel', function (esemeny) {
+      // A kerék két szélén a görgetés már az oldalt mozgatja tovább, nem akad el.
+      const utolso = opciok.length - 1;
+      if ((cel === 0 && esemeny.deltaY < 0) || (cel === utolso && esemeny.deltaY > 0)) { return; }
+      esemeny.preventDefault();
+      const egyseg = esemeny.deltaMode === 1 ? 33 : (esemeny.deltaMode === 2 ? 300 : 1);
+      gyujto += esemeny.deltaY * egyseg;
+      const most = Date.now();
+      if (Math.abs(gyujto) >= 40 && most - utolsoLepes > 90) {
+        ugras(cel + (gyujto > 0 ? 1 : -1), true);
+        gyujto = 0;
+        utolsoLepes = most;
+      }
+    }, { passive: false });
+
     kerek.addEventListener('keydown', function (esemeny) {
       const lepes = { ArrowUp: -1, ArrowDown: 1, PageUp: -3, PageDown: 3 }[esemeny.key];
       if (lepes) {
         esemeny.preventDefault();
-        ugras(select.selectedIndex + lepes, true);
+        ugras(cel + lepes, true);
       } else if (esemeny.key === 'Home' || esemeny.key === 'End') {
         esemeny.preventDefault();
         ugras(esemeny.key === 'Home' ? 0 : opciok.length - 1, true);

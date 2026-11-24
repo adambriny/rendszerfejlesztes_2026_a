@@ -17,8 +17,10 @@ oldal_fej(
 ?>
 <section class="szakasz">
   <div class="tartalom keskeny szoveg">
-    <h1>Adatkezelési nyilatkozat</h1>
-    <p class="alcim">Hatályos: [HATÁLYBALÉPÉS DÁTUMA]</p>
+    <div class="szakasz-fej">
+      <h1>Adatkezelési nyilatkozat</h1>
+      <p class="alcim">Hatályos: [HATÁLYBALÉPÉS DÁTUMA]</p>
+    </div>
     <p>Ez a nyilatkozat bemutatja, milyen adatokat kezelünk, miért, meddig, és milyen jogok illetik meg Önt.</p>
 
     <h2>1. Az adatkezelő</h2>
