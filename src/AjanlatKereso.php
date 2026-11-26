@@ -15,6 +15,9 @@ final class AjanlatKereso
     public const HAVI_MAX = 100000;
     public const HAVI_LEPES = 10000;
 
+    // Ennyi ajánlati kártya jelenik meg legfeljebb.
+    public const MAX_AJANLAT = 3;
+
     // Futamidő-sávok hónapban. A 60 hónap még az első, a 120 hónap már a harmadik sávba tartozik.
     public const SAVOK = [
         1 => ['nev' => '5 év vagy az alatt',  'min' => 1,   'max' => 60],
@@ -73,6 +76,8 @@ final class AjanlatKereso
 
         $ajanlatok = array_values($legjobb);
         usort($ajanlatok, static fn (array $a, array $b): int => self::jobb($a, $b) ? -1 : 1);
+        // A látogató legfeljebb három ajánlatot lát, akkor is, ha több intézmény van az adatbázisban.
+        $ajanlatok = array_slice($ajanlatok, 0, self::MAX_AJANLAT);
 
         foreach ($ajanlatok as $i => &$ajanlat) {
             $ajanlat['helyezes'] = $i + 1;

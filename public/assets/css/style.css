@@ -459,3 +459,26 @@ h3 { font-size: 1.1875rem; margin: 0 0 8px; letter-spacing: -0.01em; }
 .belepes { max-width: 440px; }
 .admin-csempe { display: block; color: var(--fekete); text-decoration: none; }
 .admin-csempe:hover { border-color: var(--fekete); }
+
+/* Admin táblázatok: keskeny képernyőn vízszintesen görgethetők, az oldal nem lóg ki. */
+.tabla-keret { overflow-x: auto; background: var(--feher); border: 1px solid var(--vonal); border-radius: var(--sugar); margin: 24px 0; }
+.tabla { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+.tabla th, .tabla td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--vonal); vertical-align: top; white-space: nowrap; }
+.tabla th { font-size: 0.8125rem; color: var(--szurke-sotet); font-weight: 600; background: var(--hatter); }
+.tabla tbody tr:last-child td { border-bottom: 0; }
+.tabla-szamok td:not(:first-child), .tabla-szamok th:not(:first-child) { text-align: right; }
+.muveletek { display: flex; gap: 14px; align-items: center; }
+.muveletek form { margin: 0; }
+.link-gomb { background: none; border: 0; padding: 0; font: inherit; color: var(--link); text-decoration: underline; cursor: pointer; }
+.veszelyes { color: var(--hiba); }
+.kod { background: var(--hatter); border-radius: 8px; padding: 12px; font-size: 0.8125rem; overflow-x: auto; white-space: pre; }
+.reszlet { margin-top: 40px; scroll-margin-top: 100px; }
+.uzenet ul { margin: 8px 0 0; padding-left: 20px; }
+.uzenet p { margin: 0; }
+.regi-tabla { margin-top: 14px; padding-top: 14px; border-top: 1px solid #f5c2c0; }
+.regi-tabla form { margin: 10px 0 0; }
+.gomb-veszelyes { background: var(--hiba); }
+.gomb-veszelyes:hover { background: #8e1c1c; }
+.urlap select.legordulo { width: 100%; }
+/* A rácsban lévő kártyák ne nőjenek szélesebbre a képernyőnél egy hosszú sor (például kódminta) miatt. */
+.kettes > *, .harmas > * { min-width: 0; }
