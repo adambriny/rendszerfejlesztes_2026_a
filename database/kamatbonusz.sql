@@ -206,3 +206,8 @@ INSERT IGNORE INTO tarifak (intezmeny_id, modozat, havi_megtakaritas, befizetese
   (3, 'Minta Otthonszámla 13 év', 80000, 156, 12480000, 4992000, 81640, 4.96),
   (3, 'Minta Otthonszámla 13 év', 90000, 156, 14040000, 5616000, 91845, 4.96),
   (3, 'Minta Otthonszámla 13 év', 100000, 156, 15600000, 6240000, 102050, 4.96);
+
+-- Teszt admin fiók. Felhasználónév: admin, jelszó: Kamatbonusz2026!
+-- FIGYELEM: éles indítás előtt a jelszót meg kell változtatni (lásd DEV.md).
+INSERT IGNORE INTO admin_felhasznalok (felhasznalonev, jelszo_hash) VALUES
+  ('admin', '$2y$10$/5976tY1GxG2Hd.m2AvgJe9tJ1QQ2z6VX7XovwgE0Pzx1JYW4CZrC');

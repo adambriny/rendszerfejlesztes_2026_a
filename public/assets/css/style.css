@@ -453,3 +453,9 @@ h3 { font-size: 1.1875rem; margin: 0 0 8px; letter-spacing: -0.01em; }
 .szoveg h2 { font-size: 1.25rem; margin-top: 32px; }
 .szoveg ul { padding-left: 20px; }
 .szoveg li { margin-bottom: 6px; }
+
+/* ---------- Admin felület ---------- */
+
+.belepes { max-width: 440px; }
+.admin-csempe { display: block; color: var(--fekete); text-decoration: none; }
+.admin-csempe:hover { border-color: var(--fekete); }
